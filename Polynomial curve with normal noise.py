@@ -34,13 +34,10 @@ y = simulate_polynomial_curve(x, degree=5, noise_std=0.1)
 
 import GPy
 
-# define the kernel
 kernel = GPy.kern.RBF(input_dim=1, variance=1., lengthscale=1.)
 
-# create the GP model
-model = GPy.models.GPRegression(x[:,None], y[:,None], kernel)
+model = GPy.models.GPRegression(x[:,None], y[:,None], kernel)  # create the GP model
 
-# optimize the model hyperparameters
 model.optimize()
 
 # make predictions at test points
@@ -52,27 +49,19 @@ n_samples = 20
 y_samples = model.posterior_samples_f(x_test[:,None], size=n_samples)
 
 
-# Finally, we can plot the results using matplotlib:
-
 # In[8]:
 
 
 import matplotlib.pyplot as plt
 
-# plot the ground truth curve
-plt.plot(x, y_true, color='green', label='Ground truth')
-
-# plot the noisy observations
-plt.plot(x, y, 'x', color='black', label='Observations')
-
-# plot the posterior mean curve estimate
-plt.plot(x_test, y_mean, linewidth=2, color='blue', label='Posterior mean')
+plt.plot(x, y_true, color='green', label='Ground truth')  # make predictions at test points
+plt.plot(x, y, 'x', color='black', label='Observations')  # make predictions at test points
+plt.plot(x_test, y_mean, linewidth=2, color='blue', label='Posterior mean') # make predictions at test points
 
 # plot the posterior samples
 for i in range(y_samples.shape[2]):
     plt.plot(x_test, y_samples[:, 0, i], color='gray', alpha=0.5)
 
-# add legend and title
 plt.legend()
 plt.title('Gaussian process regression')
 
