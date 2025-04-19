@@ -71,7 +71,6 @@ for i in range(1000):
     
 import matplotlib.pyplot as plt
 
-
 plt.hist(A1_star, bins=20, color='Red')  #histogram
 plt.title('A1_star histogram')
 plt.xlabel('A1_star population')
