@@ -20,7 +20,7 @@ A1_star = [0]  #Starting it as zero
 
 for i in range(1000):
     C=np.array([10,10,0,0,0,0]) #Every iteration resets collapsed state.
-    time=[0]                    #Time reset
+    time=[0]                    
     
     while time[-1]<sim_time:
         if C[0]==0:
@@ -63,25 +63,19 @@ for i in range(1000):
         #Sampling holding time.
         hld_time = np.random.exponential(scale=(1/U))
         
-        #Updating time.
         time.append(time[-1]+hld_time)
-        
-    #Updating A1_star population.
+            
     A1_star.append(C[4])
         
     #print(A1_star)
     
 import matplotlib.pyplot as plt
 
-#Plot histogram.
-plt.hist(A1_star, bins=20, color='Red')
 
-#Add labels and title.
+plt.hist(A1_star, bins=20, color='Red')  #histogram
 plt.title('A1_star histogram')
 plt.xlabel('A1_star population')
 plt.ylabel('Frequency')
-
-#Show the plot.
 plt.show()
 
 
